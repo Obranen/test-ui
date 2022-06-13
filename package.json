@@ -1,0 +1,13 @@
+{
+  "name": "test-ui",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  }
+}
