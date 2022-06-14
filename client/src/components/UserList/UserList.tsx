@@ -1,15 +1,20 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {useTypedSelector} from '../../hooks/useTypedSelector';
-import {fetchUsers} from '../../store/actionCreators/user';
-import {useActions} from '../../hooks/useActions';
+import {useTypedSelector} from '../../hooks/useTypedSelector'
+// eslint-disable-next-line
+import {fetchUsers} from '../../store/actionCreators/user'
+import {useActions} from '../../hooks/useActions'
 import classes from './UserList.module.scss'
-import Input from '../UI/Input/Input';
+import Input from '../UI/Input/Input'
+import Modal from '../UI/Modal/Modal';
+import Button from '../UI/Button/Button';
 
 const UserList: FC = () => {
+  // eslint-disable-next-line
   const [optionValue, setOptionValue] = useState('')
   const {users, loading, error} = useTypedSelector(state => state.user)
   const {fetchUsers} = useActions()
   const [findValue, setFindValue] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
 
   const arrayUsers = useMemo(() => {
     if(users.length === 0) {
@@ -21,6 +26,7 @@ const UserList: FC = () => {
 
   useEffect(() => {
     fetchUsers()
+    // eslint-disable-next-line
   }, [])
 
   if (loading) {
@@ -31,7 +37,7 @@ const UserList: FC = () => {
   }
 
   function SortArray(field: string) {
-    return (a: any, b: any) => a[field] > b[field] ? 1 : -1;
+    return (a: any, b: any) => a[field] > b[field] ? 1 : -1
   }
 
   const selectHandler = (e: any) => {
@@ -46,6 +52,17 @@ const UserList: FC = () => {
   }
   return (
     <>
+      <Button className={classes.button} onClick={() => setModalVisible(true)}>
+        Показать Модальное окно
+      </Button>
+
+      <Modal visible={modalVisible} setModalVisible={setModalVisible}>
+        <h1>Модальное окно</h1>
+        <Button className={classes.buttonContent} onClick={() => setModalVisible(false)}>
+          Закрыть
+        </Button>
+      </Modal>
+
       <p style={{fontWeight: 'bold', fontSize: '16px', marginBottom: '-3px'}}>Поиск по username:</p>
       <Input
         type={'text'}
@@ -72,16 +89,19 @@ const UserList: FC = () => {
         <div>phone</div>
         <div>website</div>
       </div>
-      {arrayUsers.map(user =>
-        <div className={classes.table} key={user.id}>
-          <div>{user.id}</div>
-          <div>{user.name}</div>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
-          <div>{user.phone}</div>
-          <div>{user.website}</div>
-        </div>
-      )}
+      {arrayUsers.length !== 0 ?
+        arrayUsers.map(user =>
+          <div className={classes.table} key={user.id}>
+            <div>{user.id}</div>
+            <div>{user.name}</div>
+            <div>{user.username}</div>
+            <div>{user.email}</div>
+            <div>{user.phone}</div>
+            <div>{user.website}</div>
+          </div>
+        ) :
+        <div className={classes.alertError}>По данному запросу нечего не найдено</div>
+      }
     </>
   )
 }
