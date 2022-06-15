@@ -1,0 +1,8 @@
+@import "../UserItem/UserItem.module";
+
+.title {
+  @extend %table;
+  background-color: #ddd;
+  font-weight: bold;
+  text-transform: capitalize;
+}

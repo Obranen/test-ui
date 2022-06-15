@@ -1,0 +1,26 @@
+%table {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #000;
+  margin: 10px;
+
+  div {
+    width: 100%;
+    border-right: 1px solid #000;
+    padding: 4px;
+
+    &:first-child {
+      font-weight: bold;
+      text-align: center;
+      background-color: #ddd;
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.table {
+  @extend %table;
+}
