@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {useTypedSelector} from '../../../hooks/useTypedSelector'
 // eslint-disable-next-line
 import {fetchUsers} from '../../../store/actionCreators/user'

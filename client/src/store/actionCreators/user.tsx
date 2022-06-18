@@ -23,3 +23,21 @@ export const fetchUsers = () => {
     }
   }
 }
+
+export const addUser = (
+  addUser: {
+    id?: number | null
+    username: string
+    email: string
+  }) => {
+  return (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({
+        type: UserActionTypes.ADD_USER,
+        addUser
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}

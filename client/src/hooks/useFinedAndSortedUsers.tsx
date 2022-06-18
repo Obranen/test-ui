@@ -15,7 +15,7 @@ export const useSortUsers = (arrayUsers: any[], sortValue: string) => {
   return findWorldUsers
 }
 
-export const useFinedAndSortedUsers = (arrayUsers: any[], sortValue: string, findValue: string) => {
+export const useFinedAndSortedUsers = (arrayUsers: any, sortValue: string, findValue: string) => {
   const sortedUsers = useSortUsers(arrayUsers, sortValue)
   const sortedAndFindUsers = useMemo(() => {
     return sortedUsers.filter(user => user.username.toLowerCase().includes(findValue.toLowerCase()))

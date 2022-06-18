@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
-import UserList from './UserList/UserList';
 import ModalAddUser from './ModalAddUser/ModalAddUser';
+import UserList from './UserList/UserList';
 
 const EditPage: FC = () => {
     return (

@@ -26,6 +26,12 @@ export const userReducer = (state = initialState, action: UserAction): IUserStat
         error: action.payload,
         users: []
       }
+    case UserActionTypes.ADD_USER:
+      return {
+        ...state,
+        users: state.users.concat(action.addUser)
+        // users: [...state.users, action.addUser]
+      }
     default:
       return state
   }

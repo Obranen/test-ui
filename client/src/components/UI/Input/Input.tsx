@@ -7,10 +7,7 @@ interface IInput {
   value?: string
 }
 
-const Input: FC<IInput> =
-  ({
-     ...props
-   }) => {
+const Input: FC<IInput> = ({...props}) => {
     return (
       <>
         <input {...props}/>

@@ -2,8 +2,10 @@ import React, {FC, useState} from 'react'
 import Button from '../../UI/Button/Button';
 import classes from './ModalAddUser.module.scss';
 import Modal from '../../UI/Modal/Modal';
+import AddUser from './AddUser/AddUser';
 
-interface IModalAddUser {}
+interface IModalAddUser {
+}
 
 const ModalAddUser: FC<IModalAddUser> =
   ({}) => {
@@ -16,7 +18,7 @@ const ModalAddUser: FC<IModalAddUser> =
         </Button>
 
         <Modal visible={modalVisible} setModalVisible={setModalVisible}>
-          <h1>Модальное окно</h1>
+          <AddUser/>
           <Button className={classes.buttonContent} onClick={() => setModalVisible(false)}>
             Закрыть
           </Button>

@@ -1,13 +1,15 @@
 export interface IUserState {
-  users: any[]
-  loading: boolean
-  error: null | string
+  users?: any
+  loading?: boolean
+  error?: null | string
+  toggleAddUser?: boolean
 }
 
 export enum UserActionTypes {
   FETCH_USERS = 'FETCH_USERS',
   FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS',
-  FETCH_USERS_ERROR = 'FETCH_USERS_ERROR'
+  FETCH_USERS_ERROR = 'FETCH_USERS_ERROR',
+  ADD_USER = 'ADD_USER',
 }
 
 interface IFetchUsersAction {
@@ -21,4 +23,16 @@ interface IFetchUsersErrorAction {
   type: UserActionTypes.FETCH_USERS_ERROR
   payload: string
 }
-export type UserAction = IFetchUsersAction | IFetchUsersSuccessAction | IFetchUsersErrorAction
+interface IAddUser {
+  type: UserActionTypes.ADD_USER
+  addUser: {
+    id?: number | null
+    username: string
+    email: string
+  }
+}
+export type UserAction =
+  IFetchUsersAction |
+  IFetchUsersSuccessAction |
+  IFetchUsersErrorAction |
+  IAddUser
