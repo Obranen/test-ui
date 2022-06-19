@@ -29,8 +29,9 @@ export const userReducer = (state = initialState, action: UserAction): IUserStat
     case UserActionTypes.ADD_USER:
       return {
         ...state,
-        users: state.users.concat(action.addUser)
-        // users: [...state.users, action.addUser]
+        // users: state.users.concat(action.addUser)
+        // users: [action.addUser, ...state.users]
+        users: [...state.users, action.addUser]
       }
     default:
       return state

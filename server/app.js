@@ -1,13 +1,13 @@
 import express from 'express'
 import config from 'config'
 import mongoose from 'mongoose';
+import peopleRoutes from './routes/people.routes.js';
 
 const app = express()
 const PORT = config.get('port')
 
-app.get('/', (req, res) => {
-  res.json('Hello!')
-})
+app.use(express.json())
+app.use('/api', peopleRoutes)
 
 async function startServer() {
   try {

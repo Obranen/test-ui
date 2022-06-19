@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react'
 import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import {useActions} from '../../../../hooks/useActions';
+import axios from 'axios';
 
 interface IAddValue {
   id?: number
@@ -24,7 +25,7 @@ const AddUser: FC = () => {
     setAddValue({...addValue, email: event.target.value})
   }
 
-  const addUserClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const addUserClickHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     const newUser = {
@@ -34,6 +35,19 @@ const AddUser: FC = () => {
     }
     addUser(newUser)
 
+    const newUserNoID = {
+      username: addValue.username,
+      email: addValue.email
+    }
+
+    // start test for http-proxy-middleware npm
+    try {
+      await axios.post('api/user/create', newUserNoID)
+    } catch (e) {
+      console.log(e)
+    }
+    // end test for http-proxy-middleware npm
+
     setAddValue({
       username: '',
       email: ''
@@ -41,14 +55,14 @@ const AddUser: FC = () => {
   }
 
   return (
-      <form>
-        <h3>Оформить подписку</h3>
-        <Input type={'text'} placeholder={'Имя'} value={addValue.username} onChange={userNameChangeHandler}/>
-        <Input type={'email'} placeholder={'Email'} value={addValue.email} onChange={emailChangeHandler}/>
-        <Button onClick={addUserClickHandler}>
-          Добавить
-        </Button>
-      </form>
+    <form>
+      <h3>Оформить подписку</h3>
+      <Input type={'text'} placeholder={'Имя'} value={addValue.username} onChange={userNameChangeHandler}/>
+      <Input type={'email'} placeholder={'Email'} value={addValue.email} onChange={emailChangeHandler}/>
+      <Button onClick={addUserClickHandler}>
+        Добавить
+      </Button>
+    </form>
   )
 }
 
